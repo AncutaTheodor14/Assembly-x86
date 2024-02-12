@@ -1,0 +1,313 @@
+.data
+	m: .space 4
+	m1: .space 4
+	n: .space 4
+	n1: .space 4
+	p: .space 4
+	x: .space 4
+	y: .space 4
+	k: .space 4
+	i: .space 4
+	j: .space 4
+	l: .space 4
+	v: .space 2600
+	w: .space 2600
+	s: .long 0
+	f1: .asciz "%d "
+	f2: .asciz "%d"
+	f3: .asciz "\n"
+.text
+.global main
+main:
+	movl $v, %edi
+	movl $w, %esi
+	movl $0, %ecx
+	movl $400, %ebx
+	fun:
+	   cmp %ecx, %ebx
+	   je fun1
+	   movl $0, (%edi, %ecx, 4)
+	   movl $0, (%esi, %ecx, 4)
+	   inc %ecx
+	   jmp fun
+	fun1:
+	   pushl $m
+	   pushl $f2
+	   call scanf
+	   popl %ebx
+	   popl %ebx
+	   
+	   pushl $n
+	   pushl $f2
+	   call scanf
+	   popl %ebx
+	   popl %ebx
+	   
+	   pushl $p
+	   pushl $f2
+	   call scanf
+	   popl %ebx
+	   popl %ebx
+	   
+	   addl $2, m
+	   addl $2, n
+	   movl $0, i
+	   jmp fun2
+	fun2:
+	    movl i, %ebx
+	    cmp %ebx, p
+	    je fun3
+	    
+	    pushl $x
+	    pushl $f2
+	    call scanf
+	    popl %ebx
+	    popl %ebx
+	    
+	    pushl $y
+	    pushl $f2
+	    call scanf
+	    popl %ebx
+	    popl %ebx
+	    
+	    addl $1, x
+	    addl $1, y
+	    movl x, %eax
+	    mull n
+	    addl y, %eax
+	    movl $1, (%edi, %eax, 4)
+	    movl $1, (%esi, %eax, 4)
+	    
+	    incl i
+	    jmp fun2
+	fun3:
+	    pushl $k
+	    pushl $f2
+	    call scanf
+	    popl %ebx
+	    popl %ebx
+	    movl $0, l
+	    movl m, %eax
+	    sub $1, %eax
+	    movl %eax, m1
+	    movl n, %eax
+	    sub $1, %eax
+	    movl %eax, n1
+	fun4:
+	    movl l, %eax
+	    cmp k, %eax
+	    je fun16
+	    
+	    movl $1, i
+	    fun5:
+	        movl i, %ebx
+	        cmp m1, %ebx
+	        je fun8
+	        
+	        movl $1, j
+	        fun6:
+	            movl j, %ecx
+	            cmp n1, %ecx
+	            je fun7
+	            
+	            movl $0, s
+	            movl $0, %edx
+	            movl i, %eax
+	            subl $1, %eax
+	            mull n
+	            movl j, %ebx
+	            subl $1, %ebx
+	            addl %ebx, %eax
+	            movl (%edi, %eax, 4), %ecx
+	            addl %ecx, s
+	            
+	            movl $0, %edx
+	            movl i, %eax
+	            subl $1, %eax
+	            mull n
+	            movl j, %ebx
+	            addl %ebx, %eax
+	            movl (%edi, %eax, 4), %ecx
+	            addl %ecx, s
+	            
+	            movl $0, %edx
+	            movl i, %eax
+	            subl $1, %eax
+	            mull n
+	            movl j, %ebx
+	            addl $1, %ebx
+	            addl %ebx, %eax
+	            movl (%edi, %eax, 4), %ecx
+	            addl %ecx, s
+	            
+	            movl $0, %edx
+	            movl i, %eax
+	            mull n
+	            movl j, %ebx
+	            subl $1, %ebx
+	            addl %ebx, %eax
+	            movl (%edi, %eax, 4), %ecx
+	            addl %ecx, s
+
+	            movl $0, %edx
+	            movl i, %eax
+	            mull n
+	            movl j, %ebx
+	            addl $1, %ebx
+	            addl %ebx, %eax
+	            movl (%edi, %eax, 4), %ecx
+	            addl %ecx, s
+
+	            movl $0, %edx
+	            movl i, %eax
+	            addl $1, %eax
+	            mull n
+	            movl j, %ebx
+	            subl $1, %ebx
+	            addl %ebx, %eax
+	            movl (%edi, %eax, 4), %ecx
+	            addl %ecx, s
+
+	            movl $0, %edx
+	            movl i, %eax
+	            addl $1, %eax
+	            mull n
+	            movl j, %ebx
+	            addl %ebx, %eax
+	            movl (%edi, %eax, 4), %ecx
+	            addl %ecx, s
+
+	            movl $0, %edx
+	            movl i, %eax
+	            addl $1, %eax
+	            mull n
+	            movl j, %ebx
+	            addl $1, %ebx
+	            addl %ebx, %eax
+	            movl (%edi, %eax, 4), %ecx
+	            addl %ecx, s
+	            
+	            movl $0, %edx
+	            movl i, %eax
+	            mull n
+	            movl j, %ebx
+	            addl %ebx, %eax
+	            movl (%edi, %eax, 4), %ecx
+	            cmp $1, %ecx
+	            jne fun10
+	            
+	            movl s, %ebx
+	            cmp $2, %ebx
+	            je fun11
+	            
+	            movl s, %ebx
+	            cmp $3, %ebx
+	            je fun11
+	            
+	            movl $0, %edx
+	            movl i, %eax
+	            mull n
+	            movl j, %ebx
+	            addl %ebx, %eax
+	            movl $0, (%esi, %eax, 4)
+	            jmp fun11  
+	            
+	            fun10:
+	                 movl s, %ebx
+	                 cmp $3, %ebx
+	                 jne fun11
+		         movl $0, %edx
+	                 movl i, %eax
+	                 mull n
+	                 movl j, %ebx
+	                 addl %ebx, %eax
+	                 movl $1, (%esi, %eax, 4)
+	                 jmp fun11  	                 
+	            
+	            fun11:       
+	                 incl j
+	                 jmp fun6
+	        fun7:
+	            incl i
+	            jmp fun5
+	        
+	    fun8:
+	        movl $1, i
+	        fun12:
+	             movl i, %ebx
+	             cmp m1, %ebx
+	             je fun13
+	             
+	             movl $1, j
+	             fun14:
+	                   movl j, %ebx
+	                   cmp n1, %ebx
+	                   je fun15
+	                   
+		           movl $0, %edx
+	                   movl i, %eax
+	                   mull n
+	                   movl j, %ebx
+	                   addl %ebx, %eax
+	                   movl (%esi, %eax, 4), %ecx
+	                   movl %ecx, (%edi, %eax, 4)	                   
+	                   
+	                   incl j
+	                   jmp fun14
+	             
+	             fun15:
+	                  incl i
+	                  jmp fun12
+	        fun13:
+	              incl l
+	              jmp fun4
+	fun16:
+	     movl $1, i
+	     fun17:
+	          movl i, %ebx
+	          cmp m1, %ebx
+	          je fun_final
+	          
+	          movl $1, j
+	          fun18:
+	               movl j, %ebx
+	               cmp n1, %ebx
+	               je fun19
+	               
+		       movl $0, %edx
+	               movl i, %eax
+	               mull n
+	               movl j, %ebx
+	               addl %ebx, %eax
+	               movl (%edi, %eax, 4), %ebx
+	               
+	               pushl %ebx
+	               pushl $f1
+	               call printf
+	               popl %ebx
+	               popl %ebx
+	               
+	               pushl $0
+	               call fflush
+	               popl %ebx	               
+	               
+	               incl j
+	               jmp fun18
+	          
+	          fun19:
+	               movl $4, %eax
+	               movl $1, %ebx
+	               movl $f3, %ecx
+	               movl $2, %edx
+	               int $0x80
+	          
+	               incl i
+	               jmp fun17
+	     
+	fun_final:
+		 pushl $0
+		 call fflush
+		 popl %ebx
+	         movl $1, %eax
+	         xor %ebx, %ebx
+	         int $0x80
